@@ -8,9 +8,14 @@
  * @see <a href="https://cs125.cs.illinois.edu/lab/8/">Lab 8 Description</a>
  */
 public class Bank {
+    /**
+     *
+     */
+    private String bankName;
 
-    public String bankName;
-
+    /**
+     *
+     */
     public Bank() {
         bankName = "Illini Bank";
     }
@@ -29,6 +34,11 @@ public class Bank {
         /*
          * Implement this function
          */
+        if (bankAccount.getAccountBalance() >= amount) {
+            bankAccount.withdraw(amount);
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -45,6 +55,11 @@ public class Bank {
         /*
          * Implement this function
          */
+        if (amount < 0) {
+            return false;
+        }
+        bankAccount.deposit(amount);
+        return true;
     }
 
     /**
@@ -64,6 +79,12 @@ public class Bank {
         /*
          * Implement this function
          */
+        if (amount <= source.getAccountBalance() && amount > 0) {
+            source.withdraw(amount);
+            destination.deposit(amount);
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -77,9 +98,13 @@ public class Bank {
         /*
          * Implement this function
          */
+        bankAccount.setOwnerName(name);
     }
 
-    public static int totalAccounts = 0;
+    /**
+     * comment.
+     */
+    private static int totalAccounts = 0;
     /**
      * Uses static variable to get number of bank accounts opened.
      *
@@ -89,6 +114,8 @@ public class Bank {
         /*
          * Implement this function
          */
+        totalAccounts = BankAccount.getTotalAccountNumber();
+        return totalAccounts;
     }
 
     /**
@@ -121,6 +148,8 @@ public class Bank {
 
         // Print number of accounts
         System.out.print("Number of active accounts at " + bank.bankName + " are ");
-        System.out.println(Bank.totalAccounts);
+        System.out.println(Bank.getNumberOfAccount());
+        System.out.println("account 1 has money: " + account1.getAccountBalance());
+        System.out.println("account 2 has money: " + account2.getAccountBalance());
     }
 }
